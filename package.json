@@ -1,6 +1,6 @@
 ﻿{
 	"name": "shopping-list",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "A different shopping list.",
 	"homepage": "http://github.com/marcusbaer/node-shopping-list",
     "keywords": ["shopping", "list"],
