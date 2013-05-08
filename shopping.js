@@ -3,12 +3,10 @@
     sys = require('util'),
 	app = require('../doxybox/lib/doxybox'),
 	config = require('./conf/config'),
-    service = require('./lib/service');
+    shoppingService = require('./lib/service');
 
 // overwrite config from file by command line arguments	
 config = _.extend(config, argv);
-
-var shoppingService = new(service.Service);
 
 // setup application
 app.config(config);
