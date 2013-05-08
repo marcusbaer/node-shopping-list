@@ -1,0 +1,32 @@
+﻿{
+	"name": "shopping-list",
+	"version": "0.0.0",
+	"description": "A different shopping list.",
+	"homepage": "http://github.com/marcusbaer/node-shopping-list",
+    "keywords": ["shopping", "list"],
+	"author": "Marcus Baer <info@baer-media.com>",
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/marcusbaer/node-shopping-list.git"
+	},
+	"bugs": {
+		"url": "https://github.com/marcusbaer/node-shopping-list/issues"
+	},
+	"licenses" : [
+        {
+            "type": "MIT",
+            "url": "http://github.com/marcusbaer/node-shopping-list/blob/master/LICENSE"
+        }
+    ],
+	"engines" : {
+		"node": ">=0.10",
+		"npm": ">=1.2.14"
+	},
+	"dependencies": {
+		"doxybox": "~0.1.0",
+		"simple-collection": "~0.0.2",
+		"underscore": ">=1.4.4",
+		"backbone": ">=1.0.0"
+	},
+	"main": "./shopping.js"
+}
