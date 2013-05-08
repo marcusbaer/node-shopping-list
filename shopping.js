@@ -1,7 +1,7 @@
 ﻿var argv = require('optimist').argv,
 	_ = require('underscore'),
     sys = require('util'),
-	app = require('../doxybox/lib/doxybox'),
+	app = require('doxybox'),
 	config = require('./conf/config'),
     shoppingService = require('./lib/service');
 
