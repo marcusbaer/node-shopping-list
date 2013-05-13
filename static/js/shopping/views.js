@@ -6,13 +6,9 @@
 
     var Views = {};
 
+    var ModelBase = Backbone.View.extend({
 
-    var MessageBase = Backbone.View.extend({
-
-        tagName: "div",
-
-        className: "message-",
-        template: _.template('<p><%=name%></p>'),
+        template: _.template('<div class="model modeltype-<%=modelType%> viewsize-<%=viewSize%>"><p><%=name%></p></div>'),
 
         events: {
             "click p": "open"
@@ -22,7 +18,7 @@
             this.listenTo(this.model, "change", this.render);
         },
         render: function () {
-            this.$el.html(this.template(this.model.attributes));
+            this.$el.html(this.template(_.extend(this.model.attributes, {modelType: this.model.type(), viewSize: this.viewSize })));
             return this;
         },
         open: function () {
@@ -30,29 +26,26 @@
         }
     });
 
-    Views.SmallMessage = MessageBase.extend({
-        className: "message-small",
-        template: _.template('<p><%=name%></p>')
+    Views.SmallModel = ModelBase.extend({
+        viewSize: 1
     });
 
-    Views.MiddleMessage = MessageBase.extend({
-        className: "message-middle",
-        template: _.template('<p><%=name%></p>')
+    Views.MiddleModel = ModelBase.extend({
+        viewSize: 2
     });
 
-    Views.LargeMessage = MessageBase.extend({
-        className: "message-large",
-        template: _.template('<p><%=name%></p>')
+    Views.LargeModel = ModelBase.extend({
+        viewSize: 3
     });
 
-    var MessagesBase = Backbone.View.extend({
+    var CollectionBase = Backbone.View.extend({
 
         tagName: "div",
 
-        className: "messages-",
+        className: "collection",
         template: _.template(''),
         itemViews: {},
-        itemView: Views.SmallItem,
+        itemView: Views.SmallModel,
 
         events: {
 //            "click .icon": "open"
@@ -75,22 +68,22 @@
         }
     });
 
-    Views.SmallListMessages = MessagesBase.extend({
-        className: "messages-small",
-        itemView: Views.SmallMessage,
-        template: _.template('<h3>SMALL Messages</h3>')
+    Views.SmallCollection = CollectionBase.extend({
+        className: "collection-1",
+        itemView: Views.SmallModel,
+        template: _.template('<h3>SMALL Collection</h3>')
     });
 
-    Views.MiddleListMessages = MessagesBase.extend({
-        className: "messages-middle",
-        itemView: Views.MiddleMessage,
-        template: _.template('<h3>MIDDLE Messages</h3>')
+    Views.MiddleCollection = MessagesBase.extend({
+        className: "collection-2",
+        itemView: Views.MiddleModel,
+        template: _.template('<h3>MIDDLE Collection</h3>')
     });
 
-    Views.LargeListMessages = MessagesBase.extend({
-        className: "messages-large",
-        itemView: Views.LargeMessage,
-        template: _.template('<h3>LARGE Messages</h3>')
+    Views.LargeCollection = MessagesBase.extend({
+        className: "collection-3",
+        itemView: Views.LargeModel,
+        template: _.template('<h3>LARGE Collection</h3>')
     });
 
     return Views;
