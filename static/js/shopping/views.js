@@ -27,7 +27,7 @@
         viewSize: 1,
 
         events: {
-            "click p": "open"
+            "click .model": "toggle"
         },
 
         initialize: function() {
@@ -37,17 +37,18 @@
             this.listenTo(this.model, "change", this.render);
         },
 
+        toggle: function () {
+            this.model.toggle();
+        },
+
         render: function () {
             this.renderTemplate(_.extend(this.model.attributes, {modelType: this.model.type, viewSize: this.viewSize }));
 			if (_.isFunction(this.renderFinal)) {
 				this.renderFinal();
 			}
             return this;
-        },
-
-        open: function () {
-            console.log(this.model);
         }
+
     });
 
     var CollectionView = ViewBase.extend({
@@ -66,16 +67,18 @@
 
         render: function () {
             var self = this;
-            var modelViews = $('<div></div>');
+//            var $modelViews = $('<div></div>');
+//            var modelViews = [];
+            this.renderTemplate({ name: this.collection.getName(), collectionType: this.collection.type, viewSize: this.viewSize });
             this.collection.forEach(function(model){
-                var modelViewOfCollection = new ModelView({
-                    viewSize: self.viewSize,
+                var ModelViewOfCollection = ModelView.extend({
+                    viewSize: self.viewSize
+                });
+                var modelViewOfCollection = new ModelViewOfCollection({
                     model: model
                 });
-
-                modelViews.append(modelViewOfCollection.render().el);
+                $(self.el).find(".models").append(modelViewOfCollection.render().el);
             });
-            this.renderTemplate({ collectionType: this.collection.type, viewSize: this.viewSize, modelViews: modelViews.html() });
             if (_.isFunction(this.renderFinal)) {
                 this.renderFinal();
             }
@@ -93,7 +96,13 @@
     });
 
     Views.MiddleModel = ModelView.extend({
-        viewSize: 2
+        viewSize: 2/*,
+        events: {
+            "click .model": "toggle"
+        },
+        toggle: function () {
+            this.model.toggle();
+        }*/
     });
 
     Views.LargeModel = ModelView.extend({

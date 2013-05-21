@@ -23,7 +23,8 @@ html(lang="de")
         <%= name%>
     script#collectionbase(type='text/template')
       div(class="collection collectiontype-<%= collectionType%> viewsize-<%= viewSize%>")
-        <%= modelViews %>
+        h1 <%= name%>
+        div.models
     script(type='text/javascript')
         function log(val) {
           $('#log').text(val);

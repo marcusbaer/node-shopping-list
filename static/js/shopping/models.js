@@ -4,8 +4,36 @@
 ], function (_, $, Backbone) {
     "use strict";
 
-    var ModelAbstract = Backbone.Model.extend({});
-    var CollectionAbstract = Backbone.Collection.extend({});
+    var ModelAbstract = Backbone.Model.extend({
+        toggle: function () {
+            var self = this;
+            $.ajax({
+                type: "PUT",
+                url: '/service/' + this.type + '/' + this.get('uid'),
+                data: {action: "toggle"}
+            }).done(function successfulToggled (response) {
+                console.log(response);
+//                var playlist = response.collection;
+//                var uid = self.get('uid');
+//                _.each(playlist, function (playlistitem) {
+//                    if (playlistitem.uid === uid) {
+//                        console.log("added to playlist");
+//                        self.set("added", playlistitem.added);
+//                    }
+//                });
+            });
+        }
+    });
+    var CollectionAbstract = Backbone.Collection.extend({
+        initialize: function (options) {
+            if (options) {
+                this.options = options;
+            }
+        },
+        getName: function () {
+            return (this.options && this.options.name) ? this.options.name : '';
+        }
+    });
 
     var Models = {};
 

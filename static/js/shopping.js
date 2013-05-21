@@ -71,7 +71,9 @@
 
 					$(document).ready(function() {
 
-                        var products = new Models.Products();
+                        var products = new Models.Products({
+                            name: 'Produkte'
+                        });
 						var productsView = new Views.MiddleCollection({
 							collection: products
 						});
@@ -81,11 +83,11 @@
                             uid: 1,
                             name: 'add product',
                             icon: ''
-                        }, {
+                        }/*, {
                             uid: 2,
                             name: 'add store',
                             icon: ''
-                        }]);
+                        }*/]);
                         var menuView = new Views.SmallCollection({
                             collection: menuitems
                         });
