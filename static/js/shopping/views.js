@@ -104,8 +104,16 @@
     VIEWS FOR COLLECTIONS
 */
 
+    Views.SmallCollection = CollectionView.extend({
+        viewSize: 2
+    });
+
     Views.MiddleCollection = CollectionView.extend({
         viewSize: 2
+    });
+
+    Views.LargeCollection = CollectionView.extend({
+        viewSize: 3
     });
 
     return Views;

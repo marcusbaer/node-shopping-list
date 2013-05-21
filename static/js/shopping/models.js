@@ -12,7 +12,7 @@
     var Label = Models.Label = ModelAbstract.extend({
 		type: 'label',
         defaults: {
-            id: null,
+            uid: null,
             name: null
         }
     });
@@ -78,6 +78,23 @@
         type: 'stores',
         model: Store,
         url: 'service/stores'
+    });
+
+    var Menuitem = Models.Menuitem = ModelAbstract.extend({
+        type: 'menuitem',
+        defaults: {
+            uid: null,
+            name: null,
+            icon: null
+        }
+    });
+
+    var Menuitems = Models.Menuitems = CollectionAbstract.extend({
+        type: 'menuitems',
+        model: Menuitem,
+        getList: function (uid) {
+            return this.toJSON();
+        }
     });
 
     return Models;

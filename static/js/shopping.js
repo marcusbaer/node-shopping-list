@@ -72,11 +72,25 @@
 					$(document).ready(function() {
 
                         var products = new Models.Products();
-						var middleView = new Views.MiddleCollection({
+						var productsView = new Views.MiddleCollection({
 							collection: products
 						});
-						
-						$('#app').append(middleView.render().el);
+                        $('#app').append(productsView.render().el);
+
+                        var menuitems = new Models.Menuitems([{
+                            uid: 1,
+                            name: 'add product',
+                            icon: ''
+                        }, {
+                            uid: 2,
+                            name: 'add store',
+                            icon: ''
+                        }]);
+                        var menuView = new Views.SmallCollection({
+                            collection: menuitems
+                        });
+                        $('#app').append($('<div id="menu"></div>'));
+                        $('#menu').append(menuView.render().el);
 
                         products.fetch();
 

@@ -6,7 +6,7 @@
 
 @import url(http://fonts.googleapis.com/css?family=Tauri);
 
-body { background-color: @base; color: @font; font-family: sans-serif; font-size: 0.9em; line-height: 1.5em; }
+body { margin: 0; background-color: @base; color: @font; font-family: sans-serif; font-size: 0.9em; line-height: 1.5em; }
 h1 { margin: 10px 5px 0 10px; padding:0; font-weight: normal; font-family: 'Tauri', sans-serif; color: lighten(@base, 15%); cursor: pointer; }
 h2 { margin: 0; padding:0; font-weight: normal; font-family: 'Tauri', sans-serif; color: @font; }
 .image { margin: 5px; float: left; }
@@ -27,6 +27,15 @@ div.model {
     margin-bottom: 5px;
 }
 
-.playlist {
-	background-color: lighten(@block, 33%);
+#menu {
+    background-color: black;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+}
+
+#menu div {
+  float: left;
+  display: inline-block;
+  background-color: black;
 }
