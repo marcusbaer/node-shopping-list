@@ -10,7 +10,17 @@
     BASIC VIEWS
 */
 
-    var ModelView = Backbone.View.extend({
+    var ViewBase = Backbone.View.extend({
+        renderTemplate: function (attributes) {
+            var html = this.template(attributes);
+            html = html.replace(/&lt;/g,'<');
+            html = html.replace(/&gt;/g,'>');
+            html = _.template(html, attributes);
+            this.$el.html(html);
+        }
+    });
+
+    var ModelView = ViewBase.extend({
 
         template: _.template($('#modelbase').html()),
 
@@ -23,7 +33,7 @@
         },
 
         render: function () {
-            this.$el.html(this.template(_.extend(this.model.attributes, {modelType: this.model.type, viewSize: this.viewSize })));
+            this.renderTemplate(_.extend(this.model.attributes, {modelType: this.model.type, viewSize: this.viewSize }));
 			if (_.isFunction(this.renderFinal)) {
 				this.renderFinal();
 			}
@@ -35,24 +45,36 @@
         }
     });
 
-    var CollectionView = Backbone.View.extend({
+    var CollectionView = ViewBase.extend({
 
         template:_.template($('#collectionbase').html()),
 
         initialize: function() {
-            this.listenTo(this.collection, "change", this.render);
+//            this.listenTo(this.collection, "change", this.render);
+            this.listenTo(this.collection, "add", this.render);
         },
 
         render: function () {
-            console.log(this.collection);
-/*
-            this.$el.html(this.template(_.extend(this.model.attributes, {modelType: this.model.type, viewSize: this.viewSize })));
+            var self = this;
+            var modelViews = [];
+            this.collection.forEach(function(model){
+                var modelViewOfCollection = new ModelView({
+                    viewSize: self.viewSize,
+                    model: model
+                });
+
+                console.log(modelViewOfCollection.render().el);
+
+
+                modelViews.push(modelViewOfCollection.render().el);
+            });
+            this.renderTemplate({ collectionType: this.collection.type, viewSize: this.viewSize, models: modelViews.join('') });
             if (_.isFunction(this.renderFinal)) {
                 this.renderFinal();
             }
-*/
             return this;
         }
+
     });
 
 /*
@@ -64,20 +86,7 @@
     });
 
     Views.MiddleModel = ModelView.extend({
-        viewSize: 2,
-		events: {
-			"click .model": "playFile"
-		},
-		playFile: function () {
-			this.model.addToPlaylist();
-		},
-		renderFinal: function () {
-			if (this.model.get("added")) {
-				this.$el.find(".model").addClass("playlist");
-			} else {
-				this.$el.find(".model").removeClass("playlist");
-			}
-		}
+        viewSize: 2
     });
 
     Views.LargeModel = ModelView.extend({
