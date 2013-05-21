@@ -18,6 +18,7 @@
     });
 
     var Labels = Models.Labels = CollectionAbstract.extend({
+        type: 'labels',
         model: Label,
         getList: function (uid) {
             return this.toJSON();
@@ -38,6 +39,7 @@
     });
 
     var Traders = Models.Traders = CollectionAbstract.extend({
+        type: 'traders',
         model: Trader,
         url: 'service/traders'
     });
@@ -54,6 +56,7 @@
     });
 
     var Products = Models.Products = CollectionAbstract.extend({
+        type: 'products',
         model: Product,
         url: 'service/products'
     });
@@ -72,6 +75,7 @@
     });
 
     var Stores = Models.Stores = CollectionAbstract.extend({
+        type: 'stores',
         model: Store,
         url: 'service/stores'
     });

@@ -24,11 +24,16 @@
 
         template: _.template($('#modelbase').html()),
 
+        viewSize: 1,
+
         events: {
             "click p": "open"
         },
 
         initialize: function() {
+            if (this.options.viewSize) {
+                this.viewSize = this.options.viewSize;
+            }
             this.listenTo(this.model, "change", this.render);
         },
 
@@ -49,26 +54,28 @@
 
         template:_.template($('#collectionbase').html()),
 
+        viewSize: 1,
+
         initialize: function() {
+            if (this.options.viewSize) {
+                this.viewSize = this.options.viewSize;
+            }
 //            this.listenTo(this.collection, "change", this.render);
             this.listenTo(this.collection, "add", this.render);
         },
 
         render: function () {
             var self = this;
-            var modelViews = [];
+            var modelViews = $('<div></div>');
             this.collection.forEach(function(model){
                 var modelViewOfCollection = new ModelView({
                     viewSize: self.viewSize,
                     model: model
                 });
 
-                console.log(modelViewOfCollection.render().el);
-
-
-                modelViews.push(modelViewOfCollection.render().el);
+                modelViews.append(modelViewOfCollection.render().el);
             });
-            this.renderTemplate({ collectionType: this.collection.type, viewSize: this.viewSize, models: modelViews.join('') });
+            this.renderTemplate({ collectionType: this.collection.type, viewSize: this.viewSize, modelViews: modelViews.html() });
             if (_.isFunction(this.renderFinal)) {
                 this.renderFinal();
             }

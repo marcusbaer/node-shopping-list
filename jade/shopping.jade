@@ -20,10 +20,10 @@ html(lang="de")
       section#footer
     script#modelbase(type='text/template')
       div(class="model modeltype-<%= modelType%> viewsize-<%= viewSize%>")
-        p <%= name%> <%= modelType%>
+        <%= name%>
     script#collectionbase(type='text/template')
       div(class="collection collectiontype-<%= collectionType%> viewsize-<%= viewSize%>")
-        p <%= name%> <%= collectionType%>
+        <%= modelViews %>
     script(type='text/javascript')
         function log(val) {
           $('#log').text(val);
