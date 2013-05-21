@@ -21,7 +21,7 @@
         post: [],
         redirect: [{
             route: '/',
-            view: 'login',
+            view: 'shopping',
             callback: function (req, res) {
                 return {title: ''};
             }

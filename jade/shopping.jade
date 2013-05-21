@@ -21,24 +21,9 @@ html(lang="de")
     script#modelbase(type='text/template')
       div(class="model modeltype-<%= modelType%> viewsize-<%= viewSize%>")
         p <%= name%> <%= modelType%>
-    script#uploadform(type='text/template')
-        div#upload
-          div#upload-status <%= uploadStatus%>
-          form(action="", method="post", enctype="multipart/form-data")
-            input(type='file', name='uploadFile')
-            br
-            input(type='text', name='uploadName')
-            br
-            input(type='submit', name='submit', value='senden')
-    script#smallcollection(type='text/template')
-        h3 SMALL Collection
-        div.collection <%= collection%>
-    script#middlecollection(type='text/template')
-        h3 MIDDLE Collection
-        div.collection <%= collection%>
-    script#largecollection(type='text/template')
-        h3 LARGE Collection
-        div.collection <%= collection%>
+    script#collectionbase(type='text/template')
+      div(class="collection collectiontype-<%= collectionType%> viewsize-<%= viewSize%>")
+        p <%= name%> <%= collectionType%>
     script(type='text/javascript')
         function log(val) {
           $('#log').text(val);

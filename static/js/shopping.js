@@ -70,24 +70,16 @@
 					// more code here in our starting route ...
 
 					$(document).ready(function() {
-					
-						mediafile = new Models.Mediafile({ uid: 1 });
-						var modelView = new Views.MiddleModel({
-							model: mediafile
-						});
-						
-						$('#app').append(modelView.render().el);
 
-						mediafile.fetch();
-						
-/*					
-						var mediafiles = new Models.Mediafiles();
-						mediafiles.fetch({
-							success: function (d) {
-								console.log(mediafiles);
-							}
+                        var products = new Models.Products();
+						var middleView = new Views.MiddleCollection({
+							collection: products
 						});
-*/					
+						
+						$('#app').append(middleView.render().el);
+
+                        products.fetch();
+
 					});
                 }
 
