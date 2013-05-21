@@ -10,18 +10,16 @@
     var Models = {};
 
     var Label = Models.Label = ModelAbstract.extend({
+		type: 'label',
         defaults: {
             id: null,
             name: null
-        },
-        type: function () {
-            return 'label';
         }
     });
 
     var Labels = Models.Labels = CollectionAbstract.extend({
         model: Label,
-        getList: function (id) {
+        getList: function (uid) {
             return this.toJSON();
         },
         addLabel: function (attrs) {
@@ -30,13 +28,12 @@
     });
 
     var Trader = Models.Trader = ModelAbstract.extend({
+		type: 'trader',
+		urlRoot: '/service/trader',
         defaults: {
-            id: null,
+            uid: null,
             name: null,
             labels: new Labels()
-        },
-        type: function () {
-            return 'trader';
         }
     });
 
@@ -46,14 +43,13 @@
     });
 
     var Product = Models.Product = ModelAbstract.extend({
+        type: 'product',
+		urlRoot: '/service/product',
         defaults: {
-            id: null,
+            uid: null,
             name: null,
             labels: new Labels(),
             traders: new Traders()
-        },
-        type: function () {
-            return 'product';
         }
     });
 
@@ -63,16 +59,15 @@
     });
 
     var Store = Models.Store = ModelAbstract.extend({
+        type: 'store',
+		urlRoot: '/service/store',
         defaults: {
-            id: null,
+            uid: null,
             name: null,
             labels: new Labels(),
             address: null,  // to display in OSM
             info: '',       // information about opening hours etc.
             trader: null    // model Trader
-        },
-        type: function () {
-            return 'store';
         }
     });
 
