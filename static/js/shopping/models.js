@@ -12,15 +12,8 @@
                 url: '/service/' + this.type + '/' + this.get('uid'),
                 data: {action: "toggle"}
             }).done(function successfulToggled (response) {
-                console.log(response);
-//                var playlist = response.collection;
-//                var uid = self.get('uid');
-//                _.each(playlist, function (playlistitem) {
-//                    if (playlistitem.uid === uid) {
-//                        console.log("added to playlist");
-//                        self.set("added", playlistitem.added);
-//                    }
-//                });
+//                self.attributes = response;
+                  self.set('flag', response.flag);
             });
         }
     });
@@ -41,6 +34,7 @@
 		type: 'label',
         defaults: {
             uid: null,
+            flag: false,
             name: null
         }
     });
@@ -61,6 +55,7 @@
 		urlRoot: '/service/trader',
         defaults: {
             uid: null,
+            flag: false,
             name: null,
             labels: new Labels()
         }
@@ -77,6 +72,7 @@
 		urlRoot: '/service/product',
         defaults: {
             uid: null,
+            flag: false,
             name: null,
             labels: new Labels(),
             traders: new Traders()
@@ -94,6 +90,7 @@
 		urlRoot: '/service/store',
         defaults: {
             uid: null,
+            flag: false,
             name: null,
             labels: new Labels(),
             address: null,  // to display in OSM
@@ -112,6 +109,7 @@
         type: 'menuitem',
         defaults: {
             uid: null,
+            flag: false,
             name: null,
             icon: null
         }
