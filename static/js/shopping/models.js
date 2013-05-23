@@ -8,13 +8,24 @@
         toggle: function () {
             var self = this;
             $.ajax({
-                type: "PUT",
+                type: "POST",
                 url: '/service/' + this.type + '/' + this.get('uid'),
-                data: {action: "toggle"}
+                data: {toggle: "flag"}
             }).done(function successfulToggled (response) {
 //                self.attributes = response;
                   self.set('flag', response.flag);
             });
+        },
+        post: function (attribute, value) {
+            var self = this;
+            $.ajax({
+                type: "POST",
+                url: '/service/' + this.type + '/' + this.get('uid'),
+                data: {attribute: attribute, value: value}
+            }).done(function successfulToggled (response) {
+//                self.attributes = response;
+                    self.set(attribute, response[attribute]);
+                });
         }
     });
     var CollectionAbstract = Backbone.Collection.extend({
