@@ -79,6 +79,13 @@
 						});
                         $('#app').append(productsView.render().el);
 
+                        $('#app').append('<button id="remove-products">Entfernen</button>');
+                        $('#remove-products').click(function(){
+                            products.removeMarked(function removeCallback (response) {
+                                productsView.render();
+                            });
+                        });
+
                         var menuitems = new Models.Menuitems([{
                             uid: 1,
                             name: 'add product',

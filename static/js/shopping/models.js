@@ -22,7 +22,7 @@
                 type: "POST",
                 url: '/service/' + this.type + '/' + this.get('uid'),
                 data: {attribute: attribute, value: value}
-            }).done(function successfulToggled (response) {
+            }).done(function successfulPosted (response) {
 //                self.attributes = response;
                     self.set(attribute, response[attribute]);
                 });
@@ -36,6 +36,20 @@
         },
         getName: function () {
             return (this.options && this.options.name) ? this.options.name : '';
+        },
+        removeMarked: function (callback) {
+            var self = this;
+            $.ajax({
+                type: "POST",
+                url: '/service/' + this.type,
+                data: {removeMarked: true}
+            }).done(function successfulRemoved (response) {
+                    console.log(response);
+//                self.attributes = response;
+                if (callback) {
+                    callback(response);
+                }
+            });
         }
     });
 
